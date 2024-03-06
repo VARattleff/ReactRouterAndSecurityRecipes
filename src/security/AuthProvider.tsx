@@ -28,7 +28,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         });
     };
 
-
     //Observe how we can sign user out without involving the backend (is that (always) good?)
     const signOut = () => {
         setUsername(null);

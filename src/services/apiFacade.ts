@@ -1,3 +1,4 @@
+
 import { API_URL } from "../settings";
 import  { makeOptions,handleHttpErrors } from "./fetchUtils";
 const CATEGORIES_URL = API_URL + "/categories";
@@ -23,7 +24,7 @@ interface Info {
 }
 
 let categories: Array<string> = [];
-let recipes: Array<Recipe> = [];
+//let recipes: Array<Recipe> = [];
 
 async function getCategories(): Promise<Array<string>> {
   if (categories.length > 0) return [...categories];
@@ -59,3 +60,4 @@ async function getInfo(): Promise<Info> {
 export type { Recipe, Info };
 // eslint-disable-next-line react-refresh/only-export-components
 export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo };
+
