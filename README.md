@@ -4,5 +4,5 @@
 
 This repository contains my solutions for the  React Router and Security Recipes of the first week
 
-Check out the [deployed website](https://kind-desert-0d6ed5c03.4.azurestaticapps.net/)!
+Check out the [deployed website](https://react-router-and-security-recipes.vercel.app/)!
 
