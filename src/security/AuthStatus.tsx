@@ -1,4 +1,4 @@
-//import { useAuth } from "./_Authprovider";
+
 import {Link, NavLink} from "react-router-dom";
 import {useAuth} from "./AuthProvider.tsx";
 
@@ -14,7 +14,7 @@ export default function AuthStatus() {
     } else {
         return (
             <li>
-                <Link to="/logout">Logout (Logged in as {auth.username}) </Link>
+               <Link to="/logout">Logout (Logged in as {auth.username}) </Link>
             </li>
         );
     }
