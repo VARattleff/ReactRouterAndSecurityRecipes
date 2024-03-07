@@ -41,11 +41,11 @@ async function getCategories(): Promise<Array<string>> {
   return categories.categoriesList;
 }
 
-async function addCategory(newCategory: string): Promise<Array<string>> {
-  const options = makeOptions("POST", { category: newCategory });
-  return fetch(CATEGORIES_URL, options).then(handleHttpErrors);
+async function addCategory(newCategory: string) {
+  const options = makeOptions("POST", null, true)
+  //categories = await fetch(CATEGORIES_URL+"/"+newCategory, options).then(handleHttpErrors)
+  fetch(CATEGORIES_URL+"/"+newCategory, options).then(handleHttpErrors)
 }
-
 
 async function getRecipes(category: string | null): Promise<Array<Recipe>> {
   //if (recipes.length > 0) return [...recipes];
