@@ -1,10 +1,10 @@
-
 import { API_URL } from "../settings";
 import  { makeOptions,handleHttpErrors } from "./fetchUtils";
 const CATEGORIES_URL = API_URL + "/categories";
 const RECIPE_URL = API_URL + "/recipes";
 const INFO_URL = API_URL + "/info";
 
+const CACHE_TIME = 1000 * 60; // 1 minutes
 
 interface Recipe {
   id: number | null;
@@ -23,14 +23,22 @@ interface Info {
   info: string;
 }
 
-let categories: Array<string> = [];
-//let recipes: Array<Recipe> = [];
+let categories = {
+  categoriesList: [] as Array<string>,
+  lastFetched: 0
+}
+
+/*let recipes: Array<Recipe> = [];*/
+
+let info: Info | null = null;
 
 async function getCategories(): Promise<Array<string>> {
-  if (categories.length > 0) return [...categories];
+   if (categories.lastFetched + CACHE_TIME > Date.now())
+     return [...categories.categoriesList];
   const res = await fetch(CATEGORIES_URL).then(handleHttpErrors);
-  categories = [...res];
-  return categories;
+  categories.categoriesList = [...res];
+  categories.lastFetched = Date.now();
+  return categories.categoriesList;
 }
 async function getRecipes(category: string | null): Promise<Array<Recipe>> {
   //if (recipes.length > 0) return [...recipes];
@@ -54,10 +62,12 @@ async function deleteRecipe(id: number): Promise<Recipe> {
 }
 
 async function getInfo(): Promise<Info> {
-  return fetch(INFO_URL).then(handleHttpErrors);
+  if(info) return info;
+  info = await fetch(INFO_URL).then(handleHttpErrors) as Info;
+  return info
+  //return fetch(INFO_URL).then(handleHttpErrors);
 }
 
 export type { Recipe, Info };
 // eslint-disable-next-line react-refresh/only-export-components
 export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo };
-

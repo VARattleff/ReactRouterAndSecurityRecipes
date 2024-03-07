@@ -8,8 +8,8 @@ export default function Recipe() {
 
     const [recipe, setRecipe] = useState<ApiRecipe | null>(null);
     useEffect(() => {
-       getRecipe(Number(id)).then((res) => setRecipe(res));
-     }, [id]);
+        getRecipe(Number(id)).then((res) => setRecipe(res));
+    }, [id]);
 
     return (
         <>

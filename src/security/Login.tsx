@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { User } from "../services/authFacade";
 import "./login.css";
-import {useLocation, useNavigate} from "react-router-dom";
 import {useAuth} from "./AuthProvider.tsx";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const Login = () => {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -24,46 +24,43 @@ const Login = () => {
     setErr(null);
     console.log(err);
     alert("Login: " + JSON.stringify(user));
-    auth.signIn(user)
-        .then(() => {
-          navigate(from, { replace: true });
-        })
+    return auth.signIn(user).then(() => {
+      navigate(from, { replace: true });
+    })
         .catch((err) => {
           setErr(err);
-          console.error(err);
         });
-
   }
 
   return (
-    <div className="login-wrapper">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Login</h2>
-        <div className="login-form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={user.username}
-            onChange={(e) => setUser((prev) => ({ ...prev, username: e.target.value }))}
-            required
-          />
-        </div>
-        <div className="login-form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={user.password}
-            onChange={(e) => setUser((prev) => ({ ...prev, password: e.target.value }))}
-            required
-          />
-        </div>
-        <button type="submit" className="login-btn">
-          Login
-        </button>
-      </form>
-    </div>
+      <div className="login-wrapper">
+        <form className="login-form" onSubmit={handleSubmit}>
+          <h2>Login</h2>
+          <div className="login-form-group">
+            <label htmlFor="username">Username</label>
+            <input
+                type="text"
+                name="username"
+                value={user.username}
+                onChange={(e) => setUser((prev) => ({ ...prev, username: e.target.value }))}
+                required
+            />
+          </div>
+          <div className="login-form-group">
+            <label htmlFor="password">Password</label>
+            <input
+                type="password"
+                name="password"
+                value={user.password}
+                onChange={(e) => setUser((prev) => ({ ...prev, password: e.target.value }))}
+                required
+            />
+          </div>
+          <button type="submit" className="login-btn">
+            Login
+          </button>
+        </form>
+      </div>
   );
 };
 

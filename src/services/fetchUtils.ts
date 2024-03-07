@@ -2,7 +2,7 @@
  * Utility Method to create options for a fetch call
  * @param method GET, POST, PUT, DELETE
  * @param body  The request body (only relevant for POST and PUT)
- * @returns 
+ * @returns
  */
 export function makeOptions(method: string, body: object | null): RequestInit {
   const opts: RequestInit = {
@@ -28,5 +28,5 @@ export async function handleHttpErrors(res:Response) {
     const msg = errorResponse.message ? errorResponse.message:"No details provided"
     throw new Error(msg)
   }
- return res.json()
+  return res.json()
 }
