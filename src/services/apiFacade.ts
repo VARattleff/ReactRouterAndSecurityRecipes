@@ -4,7 +4,7 @@ const CATEGORIES_URL = API_URL + "/categories";
 const RECIPE_URL = API_URL + "/recipes";
 const INFO_URL = API_URL + "/info";
 
-const CACHE_TIME = 1000 * 60; // 1 minutes
+// const CACHE_TIME = 1000 * 60; // 1 minutes
 
 interface Recipe {
   id: number | null;
@@ -33,13 +33,20 @@ let categories = {
 let info: Info | null = null;
 
 async function getCategories(): Promise<Array<string>> {
-   if (categories.lastFetched + CACHE_TIME > Date.now())
-     return [...categories.categoriesList];
+   //if (categories.lastFetched + CACHE_TIME > Date.now())
+    // return [...categories.categoriesList];
   const res = await fetch(CATEGORIES_URL).then(handleHttpErrors);
   categories.categoriesList = [...res];
   categories.lastFetched = Date.now();
   return categories.categoriesList;
 }
+
+async function addCategory(newCategory: string) {
+  const options = makeOptions("POST", null, true)
+  //categories = await fetch(CATEGORIES_URL+"/"+newCategory, options).then(handleHttpErrors)
+  fetch(CATEGORIES_URL+"/"+newCategory, options).then(handleHttpErrors)
+}
+
 async function getRecipes(category: string | null): Promise<Array<Recipe>> {
   //if (recipes.length > 0) return [...recipes];
   console.log("category", category);
@@ -70,4 +77,4 @@ async function getInfo(): Promise<Info> {
 
 export type { Recipe, Info };
 // eslint-disable-next-line react-refresh/only-export-components
-export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo };
+export { getCategories, getRecipes, getRecipe, addRecipe, deleteRecipe, getInfo, addCategory };

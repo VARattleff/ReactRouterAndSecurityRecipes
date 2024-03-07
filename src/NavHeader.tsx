@@ -21,6 +21,7 @@ export default function NavHeader() {
           {auth.isLoggedIn() && auth.isLoggedInAs(["ADMIN"]) && (
               <li>
                 <NavLink to="/add">Add</NavLink>
+                <NavLink to="/addCategory">Add Category</NavLink>
               </li>
           )}
         </Fragment>
